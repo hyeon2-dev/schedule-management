@@ -1,0 +1,54 @@
+package com.example.schedulemanagement.schedule.controller;
+
+import com.example.schedulemanagement.common.Consts.Const;
+import com.example.schedulemanagement.schedule.dto.request.ScheduleSaveRequestDto;
+import com.example.schedulemanagement.schedule.dto.request.ScheduleUpdateRequestDto;
+import com.example.schedulemanagement.schedule.dto.response.ScheduleResponseDto;
+import com.example.schedulemanagement.schedule.service.ScheduleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+public class ScheduleController {
+
+    private final ScheduleService scheduleService;
+
+    @PostMapping("/schedule")
+    public ResponseEntity<ScheduleResponseDto> saveSchedule(
+            @SessionAttribute(name = Const.LOGIN_USER) Long userId,
+            @RequestBody ScheduleSaveRequestDto dto
+    ) {
+        return ResponseEntity.ok(scheduleService.saveSchedule(userId, dto));
+    }
+
+    @GetMapping("/schedule")
+    public ResponseEntity<List<ScheduleResponseDto>> getAllSchedules() {
+        return ResponseEntity.ok(scheduleService.getAllSchedules());
+    }
+
+    @GetMapping("/schedules/{scheduleId}")
+    public ResponseEntity<ScheduleResponseDto> getSchedule(@PathVariable Long scheduleId) {
+        return ResponseEntity.ok(scheduleService.getSchedule(scheduleId));
+    }
+
+    @PutMapping("/schedules/{scheduleId}")
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(
+            @SessionAttribute(name = Const.LOGIN_USER) Long userId,
+            @PathVariable Long scheduleId,
+            @RequestBody ScheduleUpdateRequestDto dto
+    ) {
+        return ResponseEntity.ok(scheduleService.updateSchedule(userId, scheduleId, dto));
+    }
+
+    @DeleteMapping("/schedules/{scheduleId}")
+    public void deleteSchedule(
+            @SessionAttribute(name = Const.LOGIN_USER) Long userId,
+            @PathVariable Long scheduleId
+    ) {
+        scheduleService.deleteSchedule(userId, scheduleId);
+    }
+}
