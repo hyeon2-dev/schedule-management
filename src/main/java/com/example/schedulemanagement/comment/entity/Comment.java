@@ -4,6 +4,7 @@ import com.example.schedulemanagement.common.entity.Timestamped;
 import com.example.schedulemanagement.schedule.entity.Schedule;
 import com.example.schedulemanagement.user.entity.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,10 @@ public class Comment extends Timestamped {
     public Comment(User user, Schedule schedule, String content) {
         this.user = user;
         this.schedule = schedule;
+        this.content = content;
+    }
+
+    public void update(String content) {
         this.content = content;
     }
 }

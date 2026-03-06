@@ -59,7 +59,7 @@ public class CommentService {
                 () -> new BaseException(ErrorCode.SCHEDULE_NOT_FOUND, null)
         );
 
-        List<Comment> comments = commentRepository.findAll();
+        List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
         List<CommentResponseDto> dtoList = new ArrayList<>();
 
         for (Comment comment : comments) {
@@ -101,6 +101,8 @@ public class CommentService {
         if(!comment.getUser().getId().equals(userId)) {
             throw new BaseException(ErrorCode.COMMENT_FORBIDDEN_ACCESS, null);
         }
+
+        comment.update(dto.getContent());
 
         return new CommentResponseDto(
                 comment.getId(),

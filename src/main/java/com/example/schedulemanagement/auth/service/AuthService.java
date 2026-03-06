@@ -24,7 +24,7 @@ public class AuthService {
         );
 
         if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
-            throw new BaseException(ErrorCode.INVAILD_PASSWORD, null);
+            throw new BaseException(ErrorCode.INVALID_PASSWORD, null);
         }
 
         return user.getId();
