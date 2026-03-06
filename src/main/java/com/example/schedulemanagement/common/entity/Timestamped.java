@@ -12,14 +12,12 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Timestamped {
-
     @CreatedDate
-    @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private LocalDateTime modifiedAt;
+
 }

@@ -32,12 +32,12 @@ public class UserService {
 
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
 
-        User user = new User(dto.getUserName(), dto.getEmail(), dto.getPassword());
+        User user = new User(dto.getUserName(), dto.getEmail(), encodedPassword);
         userRepository.save(user);
 
         return new UserResponseDto(
                 user.getId(),
-                user.getPassword(),
+                user.getUserName(),
                 user.getEmail(),
                 user.getCreatedAt(),
                 user.getModifiedAt()
@@ -86,7 +86,9 @@ public class UserService {
                 () -> new BaseException(ErrorCode.USER_NOT_FOUND, null)
         );
 
-        user.update(dto.getUserName(), dto.getEmail(), dto.getPassword());
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+
+        user.update(dto.getUserName(), dto.getEmail(), encodedPassword);
 
         return new UserResponseDto(
                 user.getId(),

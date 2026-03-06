@@ -16,7 +16,7 @@ public enum ErrorCode {
 
     // 스케줄 관련 코드
     SCHEDULE_NOT_FOUND("id에 맞는 스케줄이 존재하지 않습니다.", HttpStatus.NOT_FOUND),
-    SCHEDULE_FORBIDDEN_ACCESS("본인이 작성한 스케줄만 수정할 수 있습니다.", HttpStatus.FORBIDDEN);
+    SCHEDULE_FORBIDDEN_ACCESS("본인이 작성한 스케줄만 수정 및 삭제할 수 있습니다.", HttpStatus.FORBIDDEN);
 
 
     private final String message;

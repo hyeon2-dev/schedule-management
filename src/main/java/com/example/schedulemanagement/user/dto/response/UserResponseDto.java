@@ -2,7 +2,6 @@ package com.example.schedulemanagement.user.dto.response;
 
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
