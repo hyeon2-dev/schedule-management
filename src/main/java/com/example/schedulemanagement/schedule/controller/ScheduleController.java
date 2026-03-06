@@ -3,10 +3,12 @@ package com.example.schedulemanagement.schedule.controller;
 import com.example.schedulemanagement.common.Consts.Const;
 import com.example.schedulemanagement.schedule.dto.request.ScheduleSaveRequestDto;
 import com.example.schedulemanagement.schedule.dto.request.ScheduleUpdateRequestDto;
+import com.example.schedulemanagement.schedule.dto.response.SchedulePageResponseDto;
 import com.example.schedulemanagement.schedule.dto.response.ScheduleResponseDto;
 import com.example.schedulemanagement.schedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,4 +54,13 @@ public class ScheduleController {
     ) {
         scheduleService.deleteSchedule(userId, scheduleId);
     }
+
+    @GetMapping("/schedules/page")
+    public ResponseEntity<Page<SchedulePageResponseDto>> getAllPage(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(scheduleService.getAllPage(page, size));
+    }
+
 }
