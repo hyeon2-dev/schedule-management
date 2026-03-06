@@ -27,7 +27,7 @@ public class UserService {
     @Transactional
     public UserResponseDto saveUser(UserSaveRequestDto dto) {
         if (userRepository.existsByEmail(dto.getEmail())) {
-            throw new BaseException(ErrorCode.EAMIL_ALREDAY_EXIST, null);
+            throw new BaseException(ErrorCode.EMAIL_ALREADY_EXIST, null);
         }
 
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
